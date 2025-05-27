@@ -1,0 +1,285 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #5500ff;
+  --primary-light: #7733ff;
+  --primary-dark: #4400cc;
+  --secondary: #4400cc;
+  --accent: #6622ff;
+  --dark-bg: #121212;
+  --card-bg: #1E1E1E;
+  --text-primary: #FFFFFF;
+  --text-secondary: #E2E8F0;
+  --text-tertiary: #94A3B8;
+}
+
+body {
+  @apply font-sans bg-gray-950 text-white;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5500ff;
+  @apply rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7733ff;
+}
+
+/* Animated Background */
+.stars-container {
+  background: linear-gradient(to bottom, #000000, #1E1E1E);
+  overflow: hidden;
+}
+
+.stars-container::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: -1;
+  background-image: 
+    radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 20px 120px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 100px 20px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 200px 150px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 150px 220px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 240px 70px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 180px 120px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 300px 180px, #ffffff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  animation: stars 100s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes stars {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100px); }
+}
+
+/* Section Styles */
+.section {
+  @apply relative z-10 py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-title {
+  @apply text-4xl md:text-5xl font-bold text-center mb-16;
+  background: linear-gradient(45deg, #5500ff, #7733ff, #4400cc, #6622ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 300% 300%;
+  animation: gradientFlow 6s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Card Styles */
+.card {
+  @apply relative bg-gray-900 rounded-xl overflow-hidden transition-all duration-500;
+  box-shadow: 0 4px 20px rgba(85, 0, 255, 0.2);
+  border: 1px solid rgba(85, 0, 255, 0.1);
+  animation: cardAppear 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform-origin: center;
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.card:hover {
+  @apply transform scale-[1.02];
+  border-color: #5500ff;
+  box-shadow: 0 8px 30px rgba(85, 0, 255, 0.3);
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply px-6 py-3 bg-[#5500ff] hover:bg-[#7733ff] text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#5500ff] focus:ring-opacity-50;
+  animation: buttonPulse 2s infinite;
+}
+
+@keyframes buttonPulse {
+  0% { box-shadow: 0 0 0 0 rgba(85, 0, 255, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(85, 0, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(85, 0, 255, 0); }
+}
+
+/* Skill Card Animation */
+.skill-card {
+  @apply relative flex flex-col items-center justify-center p-6 rounded-xl bg-gray-900 transition-all duration-500;
+  border: 1px solid rgba(85, 0, 255, 0.3);
+  animation: skillCardFloat 4s ease-in-out infinite;
+}
+
+@keyframes skillCardFloat {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  75% { transform: translateY(10px) rotate(-1deg); }
+}
+
+.skill-card:hover {
+  @apply transform scale-105 bg-gray-800;
+  box-shadow: 0 0 30px rgba(85, 0, 255, 0.3);
+  border-color: #5500ff;
+}
+
+/* Image Border Animation */
+.border-glow {
+  @apply relative rounded-full overflow-hidden;
+}
+
+.border-glow::before {
+  content: '';
+  @apply absolute inset-0 rounded-full;
+  padding: 3px;
+  background: linear-gradient(45deg, #5500ff, #7733ff, #4400cc, #6622ff);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+/* Text Animation */
+.animate-typing {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #5500ff;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #5500ff }
+}
+
+/* Social Icons Animation */
+.social-icon {
+  animation: socialIconPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+@keyframes socialIconPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-15deg);
+  }
+  70% {
+    transform: scale(1.2) rotate(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Timeline Animation */
+.timeline-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+  width: 0;
+  animation: progressFill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  background: linear-gradient(90deg, #5500ff, #7733ff);
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+  to { width: var(--progress-width); }
+}
+
+/* Fade In Animations */
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
